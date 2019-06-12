@@ -14,15 +14,33 @@ export default new Router({
     {
       path: '/admin',
       name: 'Admin',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Admin.vue'),
+      // Parent component
+      component: () => import('./views/admin/Index.vue'),
+
+      children: [
+        {
+          path: 'new',
+          name: 'New',
+          component: () => import('./views/admin/New.vue')
+        },
+        {
+          path: '',
+          name: 'Products',
+          component: () => import('./views/admin/Products.vue')
+        },
+        {
+          path: 'edit/:id',
+          name: 'Edit',
+          component: () => import('./views/admin/Edit.vue')
+        }
+      ]
+
+
     },
     {
       path: '/cart',
       name: 'Cart',
-      component: () => import('./views/Cart.vue'),
+      component: () => import('./views/Cart.vue')
     },
   ],
 });
